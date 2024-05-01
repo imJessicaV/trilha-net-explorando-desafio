@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace DesafioProjetoHospedagem.Models
 {
     public class Reserva
@@ -50,14 +52,24 @@ namespace DesafioProjetoHospedagem.Models
 
             // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
             // *IMPLEMENTE AQUI*
-            if (DiasReservados >= 10)
+            if (DiasReservados >= 10 && DiasReservados <= 14)
             {
-                valor = valor - (valor * 10/100);
-                Console.WriteLine($"Você teve um desconto de 10%, pois resevou 10 ou mais dias");
-                Console.WriteLine($"Dias reservados:{DiasReservados}");
+                decimal valorDesconto10 = valor - (valor * 10/100);
+                Console.WriteLine($"Dias reservados: {DiasReservados}");
+                Console.WriteLine($"Você teve um desconto de 10%, pois reservou entre 10 e 14 dias");                
+                Console.WriteLine($"Valor da(s) diária(s) com desconto: {valorDesconto10.ToString("C",CultureInfo.CreateSpecificCulture("pt-BR"))}");
+            }
+            if(DiasReservados >=15)
+            {
+                decimal valorDesconto25 = valor - (valor * 25/100);
+                Console.WriteLine($"Dias reservados: {DiasReservados}");
+                Console.WriteLine($"Você teve um desconto de 25%, pois reservou 15 ou mais dias");
+                Console.WriteLine($"Valor da(s) diária(s) com desconto: {valorDesconto25.ToString("C",CultureInfo.CreateSpecificCulture("pt-BR"))}");
+                
             }
 
             return valor;
+         
         }
     }
 }
